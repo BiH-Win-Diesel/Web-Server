@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   marginSpan: {
     margin: "6px",
-    marginLeft: "10px",
+    marginLeft: "6px",
     textAlign: "left",
   },
   boxContainerForImage: {

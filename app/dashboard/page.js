@@ -3,7 +3,6 @@
 import { Container, makeStyles } from "@material-ui/core";
 import ImageLayout from "./components/ImageLayout";
 import ImageContainer from "./components/ImageContainer";
-import useTranslation from "../translator/useTranslator";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -20,11 +19,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
   const classes = useStyles();
-  return (
+    return (
     <Container className={classes.form}>
       <h1 style={{textAlign:"center", fontSize:"50px"}}>WINDIESEL</h1>
       <Container>
-        <h1>UPDATE YOUR WAREHOUSE {t('about')}</h1>
+        <h1>UPDATE YOUR WAREHOUSE</h1>
         <ImageContainer/>
       </Container>
       <Container className={classes.container}>
