@@ -28,9 +28,14 @@ const SignupForm = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [username, setUsername] = useState("")
 
   const handleNameChange = (e) => {
     setName(e.target.value);
+  };
+
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
   };
 
   const handleEmailChange = (e) => {
@@ -51,7 +56,9 @@ const SignupForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your signup logic here
+    
+    console.log(username,name, email, phone, password, confirmPassword)
+
   };
 
   return (
@@ -74,8 +81,8 @@ const SignupForm = () => {
             variant="outlined"
             fullWidth
             className={classes.textField}
-            value={name}
-            onChange={handleNameChange}
+            value={username}
+            onChange={handleUsernameChange}
             required
           />
         </Grid>

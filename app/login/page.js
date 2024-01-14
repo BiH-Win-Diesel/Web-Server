@@ -5,6 +5,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import { signIn }from 'next-auth/react';
+// import { providers, signIn, getSession, csrfToken } from "next-auth/client";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -23,11 +25,11 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginForm = () => {
   const classes = useStyles();
-  const [email, setEmail] = useState('');
+  const [phonenumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    setPhoneNumber(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
@@ -36,7 +38,12 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your login logic here
+    signIn("credentials",{
+      phonenumber : phonenumber,
+      password : password,
+      redirect : true,
+      callbackUrl : "/"
+    })
   };
 
   return (
