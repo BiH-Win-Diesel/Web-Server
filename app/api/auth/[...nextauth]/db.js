@@ -1,17 +1,11 @@
 // db.js
 
 const mysql = require("mysql");
-import { Connection } from "@google-cloud/cloud-sql-connector";
-
-const clientOpts = await connector.getOptions({
-	instanceConnectionName: process.env.INSTANCE_CONNECTION_NAME,
-	authType: "IAM",
-});
 
 const connection = mysql.createConnection({
 	host: "35.202.164.234",
 	user: "root",
-	password: "subhojit-dey",
+	password: "*******************",
 	database: "user-details",
 	connectTimeout: 20000,
 });

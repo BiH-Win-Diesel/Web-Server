@@ -1,12 +1,10 @@
 import { NextResponse } from "next/server";
 import db from "../auth/[...nextauth]/db.js";
 
-async function handler(req, res) {}
-
 export async function GET(request) {
 	try {
-		const results = await db.query("SELECT * FROM users");
-		return NextResponse.json({ message: "Hello World" }, { status: 200 });
+		const results = await db.query("SELECT * FROM Products");
+		return NextResponse.json({ message: results}, { status: 200 });
 	} catch (error) {
 		console.error(error);
 		return NextResponse.json({ message: error }, { status: 200 });

@@ -3,6 +3,7 @@
 import { Container, makeStyles } from "@material-ui/core";
 import ImageLayout from "./components/ImageLayout";
 import ImageContainer from "./components/ImageContainer";
+import { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -19,6 +20,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
   const classes = useStyles();
+
+  useEffect(()=>{
+    fetch('http://localhost:3000/api/items')
+    .then((res)=> res.json())
+    .then((r)=>{
+      console.log(r)
+    })
+  },[])
+
     return (
     <Container className={classes.form}>
       <h1 style={{textAlign:"center", fontSize:"50px"}}>WINDIESEL</h1>
