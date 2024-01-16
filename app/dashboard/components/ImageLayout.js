@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ImageLayout(product) {
   const classes = useStyles();
-  const { Data, Quatity, Price } = product.product;
+  const { Data, Quantity, Price } = product.product;
   return (
     <Box className={classes.itemContainer}>
       <Box className={classes.boxContainerForImage}>
@@ -54,7 +54,7 @@ export default function ImageLayout(product) {
       </Box>
       <Box className={classes.dataContainer}>
         <span className={classes.marginSpan}>{Data}</span>
-        <span className={classes.marginSpan}>Quantity: {Quatity}</span>
+        <span className={classes.marginSpan}>Quantity: {Quantity}</span>
         <span className={classes.boxContainerForBtn}>
           <span>Price: {Price}</span>
           <Button style={{ background: "yellow" }} variant="contained">

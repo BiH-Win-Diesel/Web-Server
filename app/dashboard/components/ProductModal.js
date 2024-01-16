@@ -10,6 +10,7 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
   const handleSaveClick = () => {
     // Perform any validation before saving
     handleSave({
+      data : description,
       description,
       quantity: parseInt(quantity),
       price: parseFloat(price),

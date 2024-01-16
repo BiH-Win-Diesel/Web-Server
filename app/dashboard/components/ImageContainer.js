@@ -23,10 +23,12 @@ export default function ImageContainer() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // Add any additional headers if needed
+        'Accept': 'application/json'
       },
       body: JSON.stringify(data),
     };
+
+    console.log(data)
 
     fetch('http://localhost:3000/api/items', requestOptions)
     .then(res=>res.json())

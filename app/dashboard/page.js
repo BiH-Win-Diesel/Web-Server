@@ -27,7 +27,6 @@ export default function Dashboard() {
     fetch('http://localhost:3000/api/items')
     .then((res)=> res.json())
     .then((r)=>{
-      console.log(r)
       setProducts(r.data);
     })
   },[])
