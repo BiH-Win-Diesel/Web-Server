@@ -3,7 +3,8 @@
 import { Container, makeStyles } from "@material-ui/core";
 import ImageLayout from "./components/ImageLayout";
 import ImageContainer from "./components/ImageContainer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import ProductModal from "./components/ProductModal";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -20,12 +21,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
   const classes = useStyles();
+  const [ products, setProducts ] = useState([]);
 
   useEffect(()=>{
     fetch('http://localhost:3000/api/items')
     .then((res)=> res.json())
     .then((r)=>{
       console.log(r)
+      setProducts(r.data);
     })
   },[])
 
@@ -37,26 +40,9 @@ export default function Dashboard() {
         <ImageContainer/>
       </Container>
       <Container className={classes.container}>
-        <ImageLayout />
-        <ImageLayout />
-        <ImageLayout />
-        <ImageLayout />
-        <ImageLayout />
-        <ImageLayout />
-        <ImageLayout />
-        <ImageLayout />
-        <ImageLayout />
-        <ImageLayout />
-        <ImageLayout />
-        <ImageLayout />
-        <ImageLayout />
-        <ImageLayout />
-        <ImageLayout />
-        <ImageLayout />
-        <ImageLayout />
-        <ImageLayout />
-        <ImageLayout />
-        <ImageLayout />
+        {products.map((p)=>(
+          <ImageLayout product = {p}/>
+        ))}
       </Container>
     </Container>
   );
