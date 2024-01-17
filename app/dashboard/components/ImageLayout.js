@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     background: "white",
     padding: "10px",
     borderRadius: "20px",
-    margin: '5px'
+    margin: "5px",
   },
   dataContainer: {
     display: "flex",
@@ -40,13 +40,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ImageLayout(product) {
   const classes = useStyles();
-  const { Data, Quantity, Price } = product.product;
+  const { Data, Quantity, Price, ImageSourceLink } = product.product;
   return (
     <Box className={classes.itemContainer}>
       <Box className={classes.boxContainerForImage}>
         <Image
-          src={"/LayoutImages/7up_Cool_Drink_Pet.jpg"}
-          alt="7up"
+          src={
+            ImageSourceLink
+              ? `https://storage.googleapis.com/hackathon-bucket-123/images/ProductImages/${ImageSourceLink}`
+              : "/LayoutImages/7up_Cool_Drink_Pet.jpg"
+          }
+          alt="Product Image"
           width={115}
           height={115}
           objectFit={"contain"}
