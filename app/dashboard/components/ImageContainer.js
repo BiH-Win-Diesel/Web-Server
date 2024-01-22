@@ -23,40 +23,39 @@ export default function ImageContainer() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        'Accept': 'application/json'
+        Accept: "application/json",
       },
       body: JSON.stringify(data),
     };
 
-    console.log(data)
+    console.log(data);
 
-    fetch('http://localhost:3000/api/items', requestOptions)
-    .then(res=>res.json())
-    .then((data)=>console.log(data))
-
+    fetch("http://localhost:3000/api/items", requestOptions)
+      .then((res) => res.json())
+      .then((data) => console.log(data));
   };
 
   return (
     <Container>
+      Please update your warehouse using either{" "}
+      <b
+        style={{ color: "#2c4152", cursor: "pointer" }}
+        onClick={() => setOpen(true)}
+      >
+        Text
+      </b>
+      , <b style={{ color: "#2c4152", cursor: "pointer" }}>Voice</b> or{" "}
+      <b style={{ color: "#2c4152", cursor: "pointer" }}>Image</b> input.
+      <br />
+      Check <b style={{ color: "#2c4152", cursor: "pointer" }}>
+        Documentation
+      </b>{" "}
+      for help
       <ProductModal
         open={open}
         handleClose={handleClose}
         handleSave={handleSave}
       />
-      <Button
-        className={classes.btn}
-        variant="contained"
-        color="primary"
-        onClick={() => setOpen(true)}
-      >
-        Type
-      </Button>
-      <Button className={classes.btn} variant="contained" color="secondary">
-        Image
-      </Button>
-      <Button className={classes.btn} variant="contained">
-        Speak
-      </Button>
     </Container>
   );
 }

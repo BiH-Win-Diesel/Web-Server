@@ -1,16 +1,22 @@
-import React, { useState } from 'react';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@material-ui/core';
+import React, { useState } from "react";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+} from "@material-ui/core";
 
 const ProductModal = ({ open, handleClose, handleSave }) => {
-  const [description, setDescription] = useState('');
-  const [quantity, setQuantity] = useState('');
-  const [price, setPrice] = useState('');
-  const [imageSourceLink, setImageSourceLink] = useState('');
+  const [description, setDescription] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [price, setPrice] = useState("");
+  const [imageSourceLink, setImageSourceLink] = useState("");
 
   const handleSaveClick = () => {
-    // Perform any validation before saving
     handleSave({
-      data : description,
+      data: description,
       description,
       quantity: parseInt(quantity),
       price: parseFloat(price),
@@ -20,7 +26,11 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
   };
 
   return (
-    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+    <Dialog
+      open={open}
+      onClose={handleClose}
+      aria-labelledby="form-dialog-title"
+    >
       <DialogTitle id="form-dialog-title">Add Product</DialogTitle>
       <DialogContent>
         <TextField
