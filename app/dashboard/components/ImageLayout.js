@@ -6,9 +6,9 @@ import Image from "next/image";
 const useStyles = makeStyles((theme) => ({
   itemContainer: {
     background: "white",
-    borderRadius: "7px",
+    borderRadius: "10px",
     border: "1px solid #d5dde1",
-    margin: "2%",
+    margin: "3%",
   },
   dataContainer: {
     display: "flex",
@@ -79,11 +79,12 @@ export default function ImageLayout(product) {
             <Grid item xs={6} style={{ textAlign: "right" }}>
               <Button
                 style={{
-                  background: "black",
+                  background: "grey",
                   color: "white",
                   fontSize: "10px",
                 }}
                 variant="contained"
+                disabled
               >
                 Add to Cart
               </Button>

@@ -18,9 +18,14 @@ import SearchIcon from "@material-ui/icons/Search";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import TwitterIcon from "@material-ui/icons/Twitter";
+import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
+import FindReplaceIcon from "@material-ui/icons/FindReplace";
+import LocalShippingIcon from "@material-ui/icons/LocalShipping";
+import ReceiptIcon from "@material-ui/icons/Receipt";
 import ImageLayout from "./components/ImageLayout";
 import ImageContainer from "./components/ImageContainer";
 import ProductModal from "./components/ProductModal";
+import Image from "next/image";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -166,18 +171,75 @@ export default function Dashboard() {
           </div>
         </Toolbar>
       </AppBar>
-
-      <h1 style={{ textAlign: "center", fontSize: "50px" }}>WINDIESEL</h1>
-      <Container>
-        <h1>UPDATE YOUR WAREHOUSE</h1>
-        <ImageContainer />
+      <Container style={{ marginTop: "10%" }}>
+        <center>
+          <h2 style={{ color: "#2c4152" }}>Want to Update Your Warehouse?</h2>
+          <ImageContainer />
+        </center>
       </Container>
 
-      <Container className={classes.container}>
+      <Container
+        className={classes.container}
+        style={{ marginTop: "5%", marginBottom: "5%" }}
+      >
         {products.map((p) => (
           <ImageLayout product={p} />
         ))}
       </Container>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-around",
+          alignItems: "center",
+          backgroundColor: "white",
+          padding: "5%",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+          }}
+        >
+          <AssignmentTurnedInIcon />
+          <b>1 Year</b> Warranty
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+          }}
+        >
+          <FindReplaceIcon />
+          <b>7-Day</b> Replacement
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+          }}
+        >
+          <LocalShippingIcon />
+          <b>Free</b> Shipping
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+          }}
+        >
+          <ReceiptIcon />
+          <b>GST</b> Billing
+        </div>
+      </div>
 
       <Box className={classes.footer}>
         <Container>
