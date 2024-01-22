@@ -28,7 +28,7 @@ const SignupForm = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [username, setUsername] = useState("")
+  const [username, setUsername] = useState("");
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -56,13 +56,16 @@ const SignupForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    console.log(username,name, email, phone, password, confirmPassword)
 
+    console.log(username, name, email, phone, password, confirmPassword);
   };
 
   return (
-    <form className={classes.form} onSubmit={handleSubmit}>
+    <form
+      className={classes.form}
+      onSubmit={handleSubmit}
+      style={{ fontFamily: "sans-serif" }}
+    >
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <TextField
@@ -134,7 +137,12 @@ const SignupForm = () => {
           />
         </Grid>
         <Grid item xs={12}>
-          <Button type="submit" variant="contained" color="primary" fullWidth>
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            style={{ backgroundColor: "#2c4152", color: "#fffded" }}
+          >
             Sign Up
           </Button>
         </Grid>
