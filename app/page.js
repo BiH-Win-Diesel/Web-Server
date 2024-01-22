@@ -1,21 +1,12 @@
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route.js";
+"use client"
+import { useSession } from "next-auth/react";
 
-export default async function Home() {
-  const session = await getServerSession(authOptions);
+export default function Home() {
+  const session = useSession();
   return (
     <>
       <div className="grid grid-cols-2 text-white p-4">
         <div>
-          {session !== null ? (
-            <h1 className="leading-loose text-[15rem] font-extrabold text-accent">
-              Hi {session?.user.name}!
-            </h1>
-          ) : (
-            <a className="btn btn-primary" href="/api/auth/signin">
-              Login
-            </a>
-          )}
         </div>
       </div>
     </>

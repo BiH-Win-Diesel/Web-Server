@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
-    height: "auto",
+    height: "500px",
   },
   boxContainerForBtn: {
     display: "flex",
@@ -37,18 +37,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ImageLayout(product) {
   const classes = useStyles();
-  const { Data, Quantity, Price } = product.product;
+  const { Data, Quantity, Price, ImageSourceLink } = product.product;
 
   return (
     <Grid item xs={12} sm={6} md={4} lg={3}>
       <Box className={classes.itemContainer}>
         <Box className={classes.boxContainerForImage}>
           <Image
-            src={"/LayoutImages/I1.jpg"}
+            src={`https://storage.googleapis.com/hackathon-bucket-123/images/ProductImages/${ImageSourceLink}`}
             alt="7up"
             layout="responsive"
             width={100}
             height={100}
+            sizes="50vw"
           />
         </Box>
         <Box className={classes.dataContainer}>

@@ -24,8 +24,7 @@ import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import ReceiptIcon from "@material-ui/icons/Receipt";
 import ImageLayout from "./components/ImageLayout";
 import ImageContainer from "./components/ImageContainer";
-import ProductModal from "./components/ProductModal";
-import Image from "next/image";
+
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -117,7 +116,11 @@ export default function Dashboard() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/items")
+    fetch("http://localhost:3000/api/items",{
+      headers : {
+        'auth-headers' : "abs"
+      }
+    })
       .then((res) => res.json())
       .then((data) => {
         setProducts(data.data);
@@ -182,7 +185,7 @@ export default function Dashboard() {
         className={classes.container}
         style={{ marginTop: "5%", marginBottom: "5%" }}
       >
-        {products.map((p) => (
+        { products.length > 0 && products.map((p) => (
           <ImageLayout product={p} />
         ))}
       </Container>
