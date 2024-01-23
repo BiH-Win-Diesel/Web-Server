@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import Cookies from "js-cookie";
 
 export async function authenticate(password, res) {
   const is_match = await bcrypt.compare(password, res.Password);

@@ -25,7 +25,6 @@ import ReceiptIcon from "@material-ui/icons/Receipt";
 import ImageLayout from "./components/ImageLayout";
 import ImageContainer from "./components/ImageContainer";
 
-
 const useStyles = makeStyles((theme) => ({
   form: {
     maxWidth: "100vw",
@@ -114,16 +113,21 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
   const classes = useStyles();
   const [products, setProducts] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/items",{
-      headers : {
-        'auth-headers' : "abs"
-      }
-    })
-      .then((res) => res.json())
+    fetch("http://localhost:3000/api/items")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("HTTP status " + res.status);
+        }
+        return res.json();
+      })
       .then((data) => {
         setProducts(data.data);
+      })
+      .catch((err) => {
+        console.log(err)
       });
   }, []);
 
@@ -185,9 +189,8 @@ export default function Dashboard() {
         className={classes.container}
         style={{ marginTop: "5%", marginBottom: "5%" }}
       >
-        { products.length > 0 && products.map((p) => (
-          <ImageLayout product={p} />
-        ))}
+        {products.length > 0 &&
+          products.map((p) => <ImageLayout product={p} />)}
       </Container>
       <div
         style={{

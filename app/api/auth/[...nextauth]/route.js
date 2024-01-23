@@ -46,6 +46,9 @@ export const authOptions = {
     newUser: "/signup",
   },
   callbacks:{
+    async signIn(d){
+      return d
+    },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
