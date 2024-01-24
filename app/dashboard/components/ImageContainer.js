@@ -28,8 +28,6 @@ export default function ImageContainer() {
       body: JSON.stringify(data),
     };
 
-    console.log(data);
-
     fetch("http://localhost:3000/api/items", requestOptions)
       .then((res) => res.json())
       .then((data) => console.log(data));

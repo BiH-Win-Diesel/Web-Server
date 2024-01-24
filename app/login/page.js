@@ -6,6 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { signIn } from "next-auth/react";
+import { setCookie } from "cookies-next";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -41,7 +42,9 @@ const LoginForm = () => {
       phonenumber: phonenumber,
       password: password,
       redirect: true,
-      callbackUrl: "/",
+      callbackUrl: "/dashboard",
+    }).then((d) => {
+      setCookie("auth-token", d?.user?.jwt);
     });
   };
 
@@ -54,7 +57,7 @@ const LoginForm = () => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <TextField
-            label="phonenumber"
+            label="Phone Number"
             variant="outlined"
             type="text"
             fullWidth

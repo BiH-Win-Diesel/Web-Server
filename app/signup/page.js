@@ -57,7 +57,37 @@ const SignupForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(username, name, email, phone, password, confirmPassword);
+    const payload = {
+      username : username,
+      password : password,
+      phonenumber : phone,
+      email : email,
+      name : name
+    }
+
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(payload),
+    };
+
+    fetch("http://localhost:3000/api/create-user", requestOptions)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("HTTP status " + res.status);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        window.location.href = "/login"
+      })
+      .catch((err) => {
+        console.log(err)
+      });
+
   };
 
   return (

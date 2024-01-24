@@ -1,5 +1,5 @@
 import { Box, Button, Grid } from "@material-ui/core";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Image from "next/image";
 
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
-    height: "auto",
+    height: "500px",
   },
   boxContainerForBtn: {
     display: "flex",
@@ -37,18 +37,50 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ImageLayout(product) {
   const classes = useStyles();
-  const { Data, Quantity, Price } = product.product;
+  const { Data, Quantity, Price, ImageSourceLink, ProductID } = product.product;
+  const [quantity, setQuantity] = useState(Quantity);
+
+  function updateQuantity(x) {
+    const payload = {
+      id: ProductID,
+      quantity: x,
+    };
+
+    const requestOptions = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(payload),
+    };
+
+    console.log(payload)
+
+    fetch("http://localhost:3000/api/items", requestOptions)
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("HTTP status " + res.status);
+        }
+        return res.json();
+      })
+      .then((data) => {})
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return (
     <Grid item xs={12} sm={6} md={4} lg={3}>
       <Box className={classes.itemContainer}>
         <Box className={classes.boxContainerForImage}>
           <Image
-            src={"/LayoutImages/I1.jpg"}
+            src={`https://storage.googleapis.com/hackathon-bucket-123/images/ProductImages/${ImageSourceLink}`}
             alt="7up"
             layout="responsive"
             width={100}
             height={100}
+            sizes="50vw"
           />
         </Box>
         <Box className={classes.dataContainer}>
@@ -73,7 +105,7 @@ export default function ImageLayout(product) {
                 className={classes.marginSpan}
                 style={{ fontSize: "12px", color: "#cfc9c6" }}
               >
-                Stock: {Quantity}
+                Stock: {quantity}
               </span>
             </Grid>
             <Grid item xs={6} style={{ textAlign: "right" }}>
@@ -84,9 +116,28 @@ export default function ImageLayout(product) {
                   fontSize: "10px",
                 }}
                 variant="contained"
-                disabled
+                onClick={(e) => {
+                  setQuantity(quantity+1)
+                  updateQuantity(quantity+1)
+                }}
               >
-                Add to Cart
+                +
+              </Button>
+              <Button
+                style={{
+                  background: "grey",
+                  color: "white",
+                  fontSize: "10px",
+                }}
+                variant="contained"
+                onClick={(e) => {
+                  if (quantity > 0){
+                    setQuantity(quantity - 1);
+                    updateQuantity(quantity - 1)
+                  }
+                }}
+              >
+                -
               </Button>
             </Grid>
           </Grid>
