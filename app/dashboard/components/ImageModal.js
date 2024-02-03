@@ -21,7 +21,7 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
   const handleFileSelect = async (file) => {
     const uploadOk = await uploadFile(file.name, file);
     if (uploadOk) {
-      alert("Image Upload Successfully....");
+      alert("Image Uploaded Successfully!");
       setImageSourceLink(file.name);
       await fetchProductName(file.name)
     }
@@ -45,7 +45,7 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
         throw new Error("Network response was not ok");
       }
 
-      alert("Image Scrapped Successfully....")
+      alert("Image Scrapped Successfully!")
       const result = await response.json();
       setProductName(result.productName);
       setDisableSave(false);
@@ -89,7 +89,7 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
         <TextField
           margin="dense"
           id="product"
-          label="Product Name"
+          label="Product *"
           type="text"
           fullWidth
           value={productName}

@@ -32,9 +32,9 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
   const handleFileSelect = async (file) => {
     const uploadOk = await uploadFile(file.name, file);
     if(uploadOk){
-      alert("Image Upload Successfully....");
+      alert("Image Uploaded Successfully!");
       setImageSourceLink(file.name)
-      setDisableSave(true)
+      setDisableSave(false)
     }
   };
 
@@ -77,15 +77,6 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
         <input
           type="file"
           onChange={(e) => handleFileSelect(e.target.files[0])}
-        />
-        <TextField
-          margin="dense"
-          id="quantity"
-          label="Stock"
-          type="number"
-          fullWidth
-          value={quantity}
-          onChange={(e) => setQuantity(e.target.value)}
         />
         <TextField
           margin="dense"
