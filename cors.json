@@ -1,0 +1,8 @@
+[
+    {
+      "origin": ["http://localhost:3000", "https://storage.googleapis.com/hackathon-bucket-123/"],
+      "method": ["POST"],
+      "responseHeader": ["Content-Type"],
+      "maxAgeSeconds": 3600
+    }
+]

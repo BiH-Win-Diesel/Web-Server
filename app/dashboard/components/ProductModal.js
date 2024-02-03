@@ -7,6 +7,7 @@ import {
   DialogTitle,
   TextField,
 } from "@material-ui/core";
+import { useFileUpload } from "@/app/hooks/lib/uploadImage";
 
 const ProductModal = ({ open, handleClose, handleSave }) => {
   const [description, setDescription] = useState("");
@@ -23,6 +24,18 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
       imageSourceLink,
     });
     handleClose();
+  };
+
+  const uploadFile = useFileUpload()
+
+  const handleFileSelect = async (file) => {
+    const uploadOk = await uploadFile(file.name, file);
+
+    if (uploadOk) {
+      console.log("SuccessFully Uploaded....")
+    } else {
+      // show error
+    }
   };
 
   return (
@@ -69,6 +82,10 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
           fullWidth
           value={imageSourceLink}
           onChange={(e) => setImageSourceLink(e.target.value)}
+        />
+        <input
+          type="file"
+          onChange={(e) => handleFileSelect(e.target.files[0])}
         />
       </DialogContent>
       <DialogActions>
