@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     marginTop: "1%",
-    padding: "3%",
+    padding: "3%"
   },
   marginSpan: {
     margin: "0.5%",
@@ -23,10 +23,9 @@ const useStyles = makeStyles((theme) => ({
   },
   boxContainerForImage: {
     display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    justifyContent:"center",
     width: "100%",
-    height: "500px",
+    height: "400px",
   },
   boxContainerForBtn: {
     display: "flex",
@@ -55,7 +54,7 @@ export default function ImageLayout(product) {
       body: JSON.stringify(payload),
     };
 
-    console.log(payload)
+    console.log(payload);
 
     fetch("http://localhost:3000/api/items", requestOptions)
       .then((res) => {
@@ -76,15 +75,15 @@ export default function ImageLayout(product) {
         <Box className={classes.boxContainerForImage}>
           <Image
             src={`https://storage.googleapis.com/hackathon-bucket-123/images/ProductImages/${ImageSourceLink}`}
-            alt="7up"
+            alt=""
             layout="responsive"
             width={100}
             height={100}
-            sizes="50vw"
           />
         </Box>
+        <br />
         <Box className={classes.dataContainer}>
-          <span className={classes.marginSpan} style={{ fontSize: "20px" }}>
+          <span className={classes.marginSpan} style={{ fontSize: "18px" }}>
             <b>{Data}</b>
           </span>
           <Grid
@@ -116,28 +115,9 @@ export default function ImageLayout(product) {
                   fontSize: "10px",
                 }}
                 variant="contained"
-                onClick={(e) => {
-                  setQuantity(quantity+1)
-                  updateQuantity(quantity+1)
-                }}
+                disabled
               >
-                +
-              </Button>
-              <Button
-                style={{
-                  background: "grey",
-                  color: "white",
-                  fontSize: "10px",
-                }}
-                variant="contained"
-                onClick={(e) => {
-                  if (quantity > 0){
-                    setQuantity(quantity - 1);
-                    updateQuantity(quantity - 1)
-                  }
-                }}
-              >
-                -
+                Add to Cart
               </Button>
             </Grid>
           </Grid>

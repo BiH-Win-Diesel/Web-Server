@@ -3,6 +3,7 @@ import { authenticate } from "@/services/authservice";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import db from "../[...nextauth]/db.js";
+import bcrypt from "bcryptjs";
 
 export const authOptions = {
   secret: "secret",
@@ -16,19 +17,34 @@ export const authOptions = {
       async authorize(credentials, req) {
         if (typeof credentials !== "undefined") {
           const results = await db.query(
-            `select * from Users where PhoneNumber = ${credentials.phonenumber}`
+            `select * from users where PhoneNumber = ${credentials.phonenumber}`
           );
           if (results.length == 0) {
             return null;
           }
+          const storedHashedPassword = results[0].Password;
+          const userEnteredPassword = credentials.password;
+          bcrypt.compare(
+            userEnteredPassword,
+            storedHashedPassword,
+            (err, result) => {
+              if (err) {
+                console.error("Error comparing passwords:", err);
+              } else if (result === true) {
+                console.log("Password is correct");
+              } else {
+                console.log("Password is incorrect");
+              }
+            }
+          );
           const res = await authenticate(credentials.password, results[0]);
           if (typeof res !== "undefined") {
             return {
-              id : res.user.id,
-              name : res.user.name,
-              email : res.user.email,
-              jwt : res.token
-            }
+              id: res.user.id,
+              name: res.user.name,
+              email: res.user.email,
+              jwt: res.token,
+            };
           } else {
             return null;
           }
@@ -39,15 +55,15 @@ export const authOptions = {
     }),
   ],
   session: {
-    strategy: "jwt"
+    strategy: "jwt",
   },
   pages: {
     signIn: "/login",
     newUser: "/signup",
   },
-  callbacks:{
-    async signIn(d){
-      return d
+  callbacks: {
+    async signIn(d) {
+      return d;
     },
     async jwt({ token, user }) {
       if (user) {
@@ -65,7 +81,7 @@ export const authOptions = {
       session.user.email = token.email;
       return session;
     },
-  }
+  },
 };
 
 const handler = NextAuth(authOptions);
