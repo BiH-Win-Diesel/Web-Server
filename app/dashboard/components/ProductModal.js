@@ -34,7 +34,7 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
     if(uploadOk){
       alert("Image Upload Successfully....");
       setImageSourceLink(file.name)
-      disableSave(true)
+      setDisableSave(true)
     }
   };
 
