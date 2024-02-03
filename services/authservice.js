@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 
 export async function authenticate(password, res) {
   const is_match = await bcrypt.compare(password, res.Password);
+  console.log(is_match);
   if (is_match) {
     const payload = {
       id: res.UserID,
