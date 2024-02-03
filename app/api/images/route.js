@@ -1,10 +1,9 @@
-import { SignedPostPolicyV4Output } from "@google-cloud/storage";
 import { Storage } from "@google-cloud/storage";
 import { NextResponse } from "next/server";
 
 export async function GET(request) {
   const req = new URL(request.url);
-  const filename = req.searchParams.get("file")
+  const filename = `images/ProductImages/${req.searchParams.get("file")}`
 
   const storage = new Storage({
     projectId: process.env.PROJECT_ID,

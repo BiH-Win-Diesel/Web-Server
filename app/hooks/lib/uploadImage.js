@@ -7,10 +7,14 @@ export function useFileUpload() {
     Object.entries({ ...fields, file }).forEach(([key, value]) => {
       formData.append(key, value);
     });
-    const upload = await fetch(url, {
-      method: "POST",
-      body: formData,
-    });
-    return upload.ok;
+    try{
+      const upload = await fetch(url, {
+        method: "POST",
+        body: formData,
+      });
+      return upload.ok;
+    }catch(err){
+      return err
+    }
   };
 }

@@ -14,6 +14,7 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [imageSourceLink, setImageSourceLink] = useState("");
+  const [disableSave, setDisableSave] = useState(true);
 
   const handleSaveClick = () => {
     handleSave({
@@ -30,11 +31,10 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
 
   const handleFileSelect = async (file) => {
     const uploadOk = await uploadFile(file.name, file);
-
-    if (uploadOk) {
-      console.log("SuccessFully Uploaded....")
-    } else {
-      // show error
+    if(uploadOk){
+      alert("Image Upload Successfully....");
+      setImageSourceLink(file.name)
+      disableSave(true)
     }
   };
 
@@ -81,7 +81,7 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
           type="text"
           fullWidth
           value={imageSourceLink}
-          onChange={(e) => setImageSourceLink(e.target.value)}
+          disabled={true}
         />
         <input
           type="file"
@@ -92,7 +92,7 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
         <Button onClick={handleClose} color="primary">
           Cancel
         </Button>
-        <Button onClick={handleSaveClick} color="primary">
+        <Button onClick={handleSaveClick} disabled={disableSave} color="primary">
           Save
         </Button>
       </DialogActions>
