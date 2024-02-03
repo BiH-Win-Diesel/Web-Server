@@ -8,20 +8,49 @@ import {
   TextField,
 } from "@material-ui/core";
 
-const ProductModal = ({ open, handleClose, handleSave }) => {
+const ImageModal = ({ open, handleClose, handleSave }) => {
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [imageSourceLink, setImageSourceLink] = useState("");
+  const [productName, setProductName] = useState("");
 
-  const handleSaveClick = () => {
+  const fetchProductName = async () => {
+    const requestData = {
+      imageSourceLink: imageSourceLink,
+    };
+
+    try {
+      const response = await fetch('http://localhost:3001/detect-text', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const result = await response.json();
+      console.log(result);
+      setProductName(result.productName);
+    } catch (error) {
+      console.error('Error fetching product name:', error);
+    }
+  };
+  const handleSaveClick = async () => {
+    await fetchProductName();
+
     handleSave({
-      data: description,
+      productName,
       description,
       quantity: parseInt(quantity),
       price: parseFloat(price),
       imageSourceLink,
     });
+
     handleClose();
   };
 
@@ -34,14 +63,13 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
       <DialogTitle id="form-dialog-title">Add Product</DialogTitle>
       <DialogContent>
         <TextField
-          autoFocus
           margin="dense"
-          id="description"
-          label="Product *"
+          id="imageSourceLink"
+          label="Image Source Link *"
           type="text"
           fullWidth
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          value={imageSourceLink}
+          onChange={(e) => setImageSourceLink(e.target.value)}
         />
         <TextField
           margin="dense"
@@ -51,15 +79,6 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
           fullWidth
           value={price}
           onChange={(e) => setPrice(e.target.value)}
-        />
-        <TextField
-          margin="dense"
-          id="imageSourceLink"
-          label="Image Source Link *"
-          type="text"
-          fullWidth
-          value={imageSourceLink}
-          onChange={(e) => setImageSourceLink(e.target.value)}
         />
         <TextField
           margin="dense"
@@ -83,4 +102,4 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
   );
 };
 
-export default ProductModal;
+export default ImageModal;
