@@ -7,12 +7,14 @@ import {
   DialogTitle,
   TextField,
 } from "@material-ui/core";
+import { useFileUpload } from "@/app/hooks/lib/uploadImage";
 
 const ProductModal = ({ open, handleClose, handleSave }) => {
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [imageSourceLink, setImageSourceLink] = useState("");
+  const [disableSave, setDisableSave] = useState(true);
 
   const handleSaveClick = () => {
     handleSave({
@@ -23,6 +25,17 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
       imageSourceLink,
     });
     handleClose();
+  };
+
+  const uploadFile = useFileUpload()
+
+  const handleFileSelect = async (file) => {
+    const uploadOk = await uploadFile(file.name, file);
+    if(uploadOk){
+      alert("Image Upload Successfully....");
+      setImageSourceLink(file.name)
+      disableSave(true)
+    }
   };
 
   return (
@@ -68,14 +81,18 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
           type="text"
           fullWidth
           value={imageSourceLink}
-          onChange={(e) => setImageSourceLink(e.target.value)}
+          disabled={true}
+        />
+        <input
+          type="file"
+          onChange={(e) => handleFileSelect(e.target.files[0])}
         />
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
           Cancel
         </Button>
-        <Button onClick={handleSaveClick} color="primary">
+        <Button onClick={handleSaveClick} disabled={disableSave} color="primary">
           Save
         </Button>
       </DialogActions>

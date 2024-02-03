@@ -24,6 +24,7 @@ import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import ReceiptIcon from "@material-ui/icons/Receipt";
 import ImageLayout from "./components/ImageLayout";
 import ImageContainer from "./components/ImageContainer";
+import { uploadImage } from '../hooks/lib/uploadImage.js'
 
 const useStyles = makeStyles((theme) => ({
   form: {
