@@ -54,9 +54,7 @@ export default function ImageLayout(product) {
       body: JSON.stringify(payload),
     };
 
-    console.log(payload);
-
-    fetch("http://localhost:3000/api/items", requestOptions)
+    fetch("/api/items", requestOptions)
       .then((res) => {
         if (!res.ok) {
           throw new Error("HTTP status " + res.status);

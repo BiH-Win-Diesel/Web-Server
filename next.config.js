@@ -17,6 +17,15 @@ const nextConfig = {
       },
     ]
   },
+  async redirects() {
+    return [
+      {
+        source: '/api/detect-text',
+        destination: 'http://localhost:3001/detect-text',
+        permanent: true,
+      },
+    ]
+  },
 };
 
 module.exports = nextConfig;

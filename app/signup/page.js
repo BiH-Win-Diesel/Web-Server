@@ -74,7 +74,7 @@ const SignupForm = () => {
       body: JSON.stringify(payload),
     };
 
-    fetch("http://localhost:3000/api/create-user", requestOptions)
+    fetch("/api/create-user", requestOptions)
       .then((res) => {
         if (!res.ok) {
           throw new Error("HTTP status " + res.status);

@@ -117,7 +117,7 @@ export default function Dashboard() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/items")
+    fetch("/api/items")
       .then((res) => {
         if (!res.ok) {
           throw new Error("HTTP status " + res.status);
