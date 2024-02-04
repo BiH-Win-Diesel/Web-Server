@@ -8,11 +8,12 @@ const nextConfig = {
       },
     ],
   },
-  async rewrites() {
+  async redirects() {
     return [
       {
-        source: '/detect-text',
-        destination: 'http://localhost:3001/detect-text',
+        source: '/',
+        destination: '/dashboard',
+        permanent: true,
       },
     ]
   },

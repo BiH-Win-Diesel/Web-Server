@@ -1,9 +1,23 @@
 import { Storage } from "@google-cloud/storage";
 import { NextResponse } from "next/server";
 
+async function configureBucketCors(storage, bucketName) {
+  await storage.bucket(bucketName).setCorsConfiguration([
+    {
+      maxAgeSeconds:3600,
+      method: ["*"],
+      origin: ["*"],
+      responseHeader: ["*"]
+    },
+  ]);
+
+  console.log(`Bucket ${bucketName} was updated with a CORS config`);
+}
+
 export async function GET(request) {
   const req = new URL(request.url);
-  const filename = `images/ProductImages/${req.searchParams.get("file")}`
+  const filename = `images/ProductImages/${req.searchParams.get("file")}`;
+  const bucketName = process.env.BUCKET_NAME;
 
   const storage = new Storage({
     projectId: process.env.PROJECT_ID,
@@ -13,7 +27,9 @@ export async function GET(request) {
     },
   });
 
-  const bucket = storage.bucket(process.env.BUCKET_NAME);
+  await configureBucketCors(storage, bucketName);
+
+  const bucket = storage.bucket(bucketName);
   const file = bucket.file(filename);
   const options = {
     expires: Date.now() + 5 * 60 * 1000, //  5 minutes,
