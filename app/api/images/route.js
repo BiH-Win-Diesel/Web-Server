@@ -1,19 +1,6 @@
 import { Storage } from "@google-cloud/storage";
 import { NextResponse } from "next/server";
 
-async function configureBucketCors(storage, bucketName) {
-  await storage.bucket(bucketName).setCorsConfiguration([
-    {
-      maxAgeSeconds:3600,
-      method: ["*"],
-      origin: ["*"],
-      responseHeader: ["*"]
-    },
-  ]);
-
-  console.log(`Bucket ${bucketName} was updated with a CORS config`);
-}
-
 export async function GET(request) {
   const req = new URL(request.url);
   const filename = `images/ProductImages/${req.searchParams.get("file")}`;
@@ -26,8 +13,6 @@ export async function GET(request) {
       private_key: process.env.PRIVATE_KEY,
     },
   });
-
-  await configureBucketCors(storage, bucketName);
 
   const bucket = storage.bucket(bucketName);
   const file = bucket.file(filename);
