@@ -5,6 +5,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  LinearProgress,
   TextField,
 } from "@material-ui/core";
 import { useFileUpload } from "@/app/hooks/lib/uploadImage";
@@ -17,19 +18,24 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
   const [imageSourceLink, setImageSourceLink] = useState("");
   const [productName, setProductName] = useState("");
   const [disableSave, setDisableSave] = useState(true);
+  const [loader, setLoader] = useState(false);
 
   const handleFileSelect = async (file) => {
+    setLoader(true);
     const uploadOk = await uploadFile(file.name, file);
     if (uploadOk) {
-      alert("Image Uploaded Successfully!");
       setImageSourceLink(file.name);
-      await fetchProductName(file.name)
+      await fetchProductName(file.name);
+      setLoader(false);
+    } else {
+      setLoader(false);
+      alert("Upload Failed..... ");
     }
   };
 
   const fetchProductName = async (imageSourceLink) => {
     const requestData = {
-      imageUrl: `https://storage.googleapis.com/hackathon-bucket-123/images/ProductImages/${imageSourceLink}`
+      imageUrl: `https://storage.googleapis.com/hackathon-bucket-123/images/ProductImages/${imageSourceLink}`,
     };
 
     try {
@@ -45,7 +51,7 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
         throw new Error("Network response was not ok");
       }
 
-      alert("Image Scrapped Successfully!")
+      alert("Image Scrapped Successfully!");
       const result = await response.json();
       setProductName(result.productName);
       setDisableSave(false);
@@ -56,10 +62,10 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
   const handleSaveClick = async () => {
     handleSave({
       data: productName,
-      productName,
+      description: productName,
       quantity: parseInt(quantity),
       price: parseFloat(price),
-      imageSourceLink,
+      imageSourceLink: imageSourceLink,
     });
 
     handleClose();
@@ -118,10 +124,15 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
         <Button onClick={handleClose} color="primary">
           Cancel
         </Button>
-        <Button onClick={handleSaveClick} disabled={disableSave} color="primary">
+        <Button
+          onClick={handleSaveClick}
+          disabled={disableSave}
+          color="primary"
+        >
           Save
         </Button>
       </DialogActions>
+      {loader && <LinearProgress />}
     </Dialog>
   );
 };

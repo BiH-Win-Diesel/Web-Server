@@ -5,6 +5,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  LinearProgress,
   TextField,
 } from "@material-ui/core";
 import { useFileUpload } from "@/app/hooks/lib/uploadImage";
@@ -15,26 +16,31 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
   const [price, setPrice] = useState("");
   const [imageSourceLink, setImageSourceLink] = useState("");
   const [disableSave, setDisableSave] = useState(true);
+  const [loader, setLoader] = useState(false);
 
   const handleSaveClick = () => {
     handleSave({
       data: description,
-      description,
+      description: description,
       quantity: parseInt(quantity),
       price: parseFloat(price),
-      imageSourceLink,
+      imageSourceLink: imageSourceLink,
     });
     handleClose();
   };
 
-  const uploadFile = useFileUpload()
+  const uploadFile = useFileUpload();
 
   const handleFileSelect = async (file) => {
+    setLoader(true);
     const uploadOk = await uploadFile(file.name, file);
-    if(uploadOk){
-      alert("Image Uploaded Successfully!");
-      setImageSourceLink(file.name)
-      setDisableSave(false)
+    if (uploadOk) {
+      setImageSourceLink(file.name);
+      setDisableSave(false);
+      setLoader(false);
+    } else {
+      setLoader(false);
+      alert("Upload Failed..... ");
     }
   };
 
@@ -92,10 +98,15 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
         <Button onClick={handleClose} color="primary">
           Cancel
         </Button>
-        <Button onClick={handleSaveClick} disabled={disableSave} color="primary">
+        <Button
+          onClick={handleSaveClick}
+          disabled={disableSave}
+          color="primary"
+        >
           Save
         </Button>
       </DialogActions>
+      {loader && <LinearProgress />}
     </Dialog>
   );
 };

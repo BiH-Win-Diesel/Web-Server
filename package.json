@@ -14,6 +14,7 @@
 		"@emotion/styled": "^11.11.0",
 		"@google-cloud/cloud-sql-connector": "^1.2.1",
 		"@google-cloud/storage": "^7.7.0",
+		"@google-cloud/vision": "^4.0.3",
 		"@material-ui/core": "^4.12.4",
 		"@material-ui/icons": "^4.11.3",
 		"@mui/material": "^5.15.3",

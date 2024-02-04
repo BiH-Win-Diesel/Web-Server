@@ -7,15 +7,7 @@ const nextConfig = {
         hostname: "**",
       },
     ],
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/detect-text',
-        destination: 'http://localhost:3001/detect-text',
-      },
-    ]
-  },
+  }
 };
 
 module.exports = nextConfig;

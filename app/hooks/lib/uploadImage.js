@@ -13,7 +13,7 @@ export function useFileUpload() {
         body: formData,
         headers: {
           "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Headers" : "*"
+          "Access-Control-Allow-Headers": "*",
         },
       });
       return upload.ok;
