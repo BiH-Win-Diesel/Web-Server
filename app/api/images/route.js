@@ -3,7 +3,8 @@ import { NextResponse } from "next/server";
 
 export async function GET(request) {
   const req = new URL(request.url);
-  const filename = `images/ProductImages/${req.searchParams.get("file")}`;
+  const path = req.searchParams.get("path");
+  const filename = `${path}${req.searchParams.get("file")}`;
   const bucketName = process.env.BUCKET_NAME;
 
   const storage = new Storage({

@@ -1,6 +1,6 @@
 export function useFileUpload() {
-  return async (filename, file) => {
-    const result = await fetch(`/api/images?file=${filename}`);
+  return async (filename, file,path) => {
+    const result = await fetch(`/api/images?file=${filename}&path=${path}`);
     const res = await result.json();
     const { url, fields } = res.data;
     const formData = new FormData();
