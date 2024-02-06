@@ -82,7 +82,9 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
         />
         <input
           type="file"
-          onChange={(e) => handleFileSelect(e.target.files[0])}
+          onChange={(e) => {
+            handleFileSelect(e.target.files[0])
+          }}
         />
         <TextField
           margin="dense"
