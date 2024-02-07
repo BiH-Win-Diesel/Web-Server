@@ -42,6 +42,10 @@ const VoiceUploader = () => {
         }else{
           alert("Upload failed.....")
         }
+        const blob = new Blob(chunks, { type: "audio/wav" });
+        const file = new File([blob], "file.wav", { type: "audio/wav" });
+
+        let uploadOk = await uploadFile("file.wav", file);
       };
     }
 
@@ -104,6 +108,24 @@ const VoiceUploader = () => {
           <MicNoneRounded fontSize="large" />
         )}
       </div>
+  }
+
+  return (
+    <div>
+      <Button
+        color="secondary"
+        onClick={() => {
+          if (!flag) {
+            voiceStartHandler();
+          } else {
+            voiceStopHandler();
+          }
+
+          setFlag(!flag);
+        }}
+      >
+        {flag ? "Stop" : "Start"}
+      </Button>
     </div>
   );
 };
