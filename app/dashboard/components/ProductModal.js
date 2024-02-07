@@ -11,6 +11,7 @@ import {
 import { useFileUpload } from "@/app/hooks/lib/uploadImage";
 
 const ProductModal = ({ open, handleClose, handleSave }) => {
+  const path = "images/ProductImages/"
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
@@ -33,7 +34,7 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
 
   const handleFileSelect = async (file) => {
     setLoader(true);
-    const uploadOk = await uploadFile(file.name, file);
+    const uploadOk = await uploadFile(file.name, file, path);
     if (uploadOk) {
       setImageSourceLink(file.name);
       setDisableSave(false);

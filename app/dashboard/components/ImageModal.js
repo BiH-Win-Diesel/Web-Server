@@ -11,8 +11,8 @@ import {
 import { useFileUpload } from "@/app/hooks/lib/uploadImage";
 
 const ImageModal = ({ open, handleClose, handleSave }) => {
+  const path = "images/ProductImages/"
   const uploadFile = useFileUpload();
-  const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [imageSourceLink, setImageSourceLink] = useState("");
@@ -22,7 +22,7 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
 
   const handleFileSelect = async (file) => {
     setLoader(true);
-    const uploadOk = await uploadFile(file.name, file);
+    const uploadOk = await uploadFile(file.name, file, path);
     if (uploadOk) {
       setImageSourceLink(file.name);
       await fetchProductName(file.name);
@@ -77,7 +77,7 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
     >
-      <DialogTitle id="form-dialog-title">Add Product</DialogTitle>
+      <DialogTitle id="form-dialog-title">Add Product </DialogTitle>
       <DialogContent>
         <input
           type="file"
