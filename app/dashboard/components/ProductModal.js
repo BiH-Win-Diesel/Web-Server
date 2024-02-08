@@ -80,11 +80,11 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
     }
   };
 
-  useEffect(() => {
+  const handleGenerateImageClick = () => {
     if (description.trim() !== "") {
       generateImage(description);
     }
-  }, [description]);
+  };
 
   return (
     <Dialog
@@ -99,16 +99,23 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
         Add Product
       </DialogTitle>
       <DialogContent>
-        <TextField
-          autoFocus
-          margin="dense"
-          id="description"
-          label="Product *"
-          type="text"
-          fullWidth
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
+        <div>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="description"
+            label="Product *"
+            type="text"
+            fullWidth
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <center>
+            <Button onClick={handleGenerateImageClick} color="primary">
+              Generate Image
+            </Button>
+          </center>
+        </div>
         <TextField
           margin="dense"
           id="price"

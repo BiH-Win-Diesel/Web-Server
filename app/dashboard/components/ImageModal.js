@@ -84,10 +84,12 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
         Add Product
       </DialogTitle>
       <DialogContent>
-        <input
-          type="file"
-          onChange={(e) => handleFileSelect(e.target.files[0])}
-        />
+        <center>
+          <input
+            type="file"
+            onChange={(e) => handleFileSelect(e.target.files[0])}
+          />
+        </center>
         <TextField
           margin="dense"
           id="imageSourceLink"
