@@ -18,7 +18,7 @@ export async function GET(request) {
   const bucket = storage.bucket(bucketName);
   const file = bucket.file(filename);
   const options = {
-    expires: Date.now() + 5 * 60 * 1000, //  5 minutes,
+    expires: Date.now() + 5 * 60 * 1000,
     fields: { "x-goog-meta-source": "nextjs-project" },
   };
   const [response] = await file.generateSignedPostPolicyV4(options);

@@ -29,7 +29,7 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
       setLoader(false);
     } else {
       setLoader(false);
-      alert("Upload Failed..... ");
+      alert("Upload Failed!");
     }
   };
 

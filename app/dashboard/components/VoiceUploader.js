@@ -33,19 +33,14 @@ const VoiceUploader = () => {
         const file = new File([blob], filename, { type: "audio/wav" });
         let uploadOk = await uploadFile(filename, file, path);
 
-
         if(uploadOk){
           const url = `https://storage.googleapis.com/hackathon-bucket-123/${path}${filename}`;
           const response = await fetch(`/api/voice/?url=${url}`);
           const r = await response.json();
           console.log(r)
         }else{
-          alert("Upload failed.....")
+          alert("Upload failed!")
         }
-        const blob = new Blob(chunks, { type: "audio/wav" });
-        const file = new File([blob], "file.wav", { type: "audio/wav" });
-
-        let uploadOk = await uploadFile("file.wav", file);
       };
     }
 
@@ -72,61 +67,61 @@ const VoiceUploader = () => {
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        width: "100vw",
-        height: "100vh",
-        alignItems: "center",
-        justifyContent: "center",
-        position: "absolute",
-      }}
-      onClick={() => {
-        if (!flag) {
-          voiceStartHandler();
-        } else {
-          voiceStopHandler();
-        }
-        setFlag(!flag);
-      }}
-    >
+    <>
       <div
         style={{
-          background: "red",
-          width: "100px",
-          height: "100px",
           display: "flex",
+          width: "100vw",
+          height: "100vh",
           alignItems: "center",
           justifyContent: "center",
-          borderRadius: "50%",
-          cursor: "pointer",
+          position: "absolute",
         }}
-      >
-        {flag ? (
-          <MicSharp fontSize="large" />
-        ) : (
-          <MicNoneRounded fontSize="large" />
-        )}
-      </div>
-  }
-
-  return (
-    <div>
-      <Button
-        color="secondary"
         onClick={() => {
           if (!flag) {
             voiceStartHandler();
           } else {
             voiceStopHandler();
           }
-
           setFlag(!flag);
         }}
       >
-        {flag ? "Stop" : "Start"}
-      </Button>
-    </div>
+        <div
+          style={{
+            background: "red",
+            width: "100px",
+            height: "100px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: "50%",
+            cursor: "pointer",
+          }}
+        >
+          {flag ? (
+            <MicSharp fontSize="large" />
+          ) : (
+            <MicNoneRounded fontSize="large" />
+          )}
+        </div>
+      </div>
+      <div>
+        <Button
+          color="secondary"
+          onClick={() => {
+            if (!flag) {
+              voiceStartHandler();
+            } else {
+              voiceStopHandler();
+            }
+
+            setFlag(!flag);
+          }}
+        >
+          {flag ? "Stop" : "Start"}
+        </Button>
+      </div>
+    </>
   );
 };
 

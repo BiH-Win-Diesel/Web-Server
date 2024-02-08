@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Dialog,
@@ -8,16 +8,16 @@ import {
   LinearProgress,
   TextField,
 } from "@material-ui/core";
-import { useFileUpload } from "@/app/hooks/lib/uploadImage";
 
 const ProductModal = ({ open, handleClose, handleSave }) => {
-  const path = "images/ProductImages/"
+  const path = "images/ProductImages/";
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
   const [imageSourceLink, setImageSourceLink] = useState("");
   const [disableSave, setDisableSave] = useState(true);
   const [loader, setLoader] = useState(false);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState("");
 
   const handleSaveClick = () => {
     handleSave({
@@ -30,20 +30,43 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
     handleClose();
   };
 
-  const uploadFile = useFileUpload();
+  const generateImage = async (description) => {
+    const apiKey =
+      "b2247b90c0a87b2dc2e1507e1f631a1e36a3b3b65450e0ac207503d50a6329dbb85c1b480252673848fc7be9d87905e6";
+    const form = new FormData();
+    form.append("prompt", description);
 
-  const handleFileSelect = async (file) => {
     setLoader(true);
-    const uploadOk = await uploadFile(file.name, file, path);
-    if (uploadOk) {
-      setImageSourceLink(file.name);
-      setDisableSave(false);
+    try {
+      const response = await fetch("https://clipdrop-api.co/text-to-image/v1", {
+        method: "POST",
+        headers: {
+          "x-api-key": apiKey,
+        },
+        body: form,
+      });
+      if (response.ok) {
+        const blob = await response.blob();
+        const imageObjectURL = URL.createObjectURL(blob);
+        setImagePreviewUrl(imageObjectURL);
+        setImageSourceLink(imageObjectURL);
+        setDisableSave(false);
+      } else {
+        const errorText = await response.text();
+        alert("Image generation failed: " + errorText);
+      }
+    } catch (error) {
+      alert("An error occurred: " + error.message);
+    } finally {
       setLoader(false);
-    } else {
-      setLoader(false);
-      alert("Upload Failed..... ");
     }
   };
+
+  useEffect(() => {
+    if (description.trim() !== "") {
+      generateImage(description);
+    }
+  }, [description]);
 
   return (
     <Dialog
@@ -81,12 +104,13 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
           value={imageSourceLink}
           disabled={true}
         />
-        <input
-          type="file"
-          onChange={(e) => {
-            handleFileSelect(e.target.files[0])
-          }}
-        />
+        {imagePreviewUrl && (
+          <img
+            src={imagePreviewUrl}
+            alt="Generated"
+            style={{ width: "100%", marginTop: 20 }}
+          />
+        )}
         <TextField
           margin="dense"
           id="quantity"
