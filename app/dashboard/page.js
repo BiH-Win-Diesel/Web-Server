@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     padding: theme.spacing(3.5),
     marginTop: "auto",
-    backgroundColor: "#2c4152",
+    backgroundColor: "#d97744",
   },
   footerColumn: {
     display: "flex",
@@ -128,7 +128,7 @@ export default function Dashboard() {
         setProducts(data.data);
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
       });
   }, []);
 
@@ -138,8 +138,8 @@ export default function Dashboard() {
         position="fixed"
         style={{
           backgroundColor: "white",
-          borderTop: "3px solid #2c4152",
-          color: "#2c4152",
+          borderTop: "3px solid #d97744",
+          color: "#d97744",
           padding: "0.3%",
         }}
       >
@@ -160,7 +160,7 @@ export default function Dashboard() {
             className={classes.search}
             style={{
               borderRadius: "20px",
-              border: "1px solid #2c4152",
+              border: "1px solid #d97744",
               position: "absolute",
               right: "0.3%",
               backgroundColor: "#fffded",
@@ -180,73 +180,36 @@ export default function Dashboard() {
           </div>
         </Toolbar>
       </AppBar>
-      <Container style={{ marginTop: "10%" }}>
+      <img
+        src={"/static-image/BiH_Cover.jpg"}
+        alt=""
+        style={{ width: "100%" }}
+      />
+      <Container style={{ marginTop: "8%", marginBottom: "8%" }}>
         <center>
-          <h2 style={{ color: "#2c4152" }}>Want to Update Your Warehouse?</h2>
           <ImageContainer />
         </center>
       </Container>
-
       <Container
         className={classes.container}
-        style={{ marginTop: "5%", marginBottom: "5%" }}
+        style={{ marginTop: "10%", marginBottom: "7%" }}
       >
         {products.length > 0 &&
           products.map((p) => <ImageLayout product={p} />)}
       </Container>
       <div
         style={{
-          display: "flex",
-          justifyContent: "space-around",
           alignItems: "center",
           backgroundColor: "white",
           padding: "5%",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-          }}
-        >
-          <AssignmentTurnedInIcon />
-          <b>1 Year</b> Warranty
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-          }}
-        >
-          <FindReplaceIcon />
-          <b>7-Day</b> Replacement
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-          }}
-        >
-          <LocalShippingIcon />
-          <b>Free</b> Shipping
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-          }}
-        >
-          <ReceiptIcon />
-          <b>GST</b> Billing
-        </div>
+        <center>
+          <h2>
+            " Retail's Digitization Boom is Not Leaving Kirana Stores Behind "
+          </h2>
+          <i>-Harsh Gupta, Investor, India</i>
+        </center>
       </div>
 
       <Box className={classes.footer}>

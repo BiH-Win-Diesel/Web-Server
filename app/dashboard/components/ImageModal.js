@@ -11,7 +11,7 @@ import {
 import { useFileUpload } from "@/app/hooks/lib/uploadImage";
 
 const ImageModal = ({ open, handleClose, handleSave }) => {
-  const path = "images/ProductImages/"
+  const path = "images/ProductImages/";
   const uploadFile = useFileUpload();
   const [quantity, setQuantity] = useState("");
   const [price, setPrice] = useState("");
@@ -77,7 +77,12 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
     >
-      <DialogTitle id="form-dialog-title">Add Product </DialogTitle>
+      <DialogTitle
+        id="form-dialog-title"
+        style={{ textAlign: "center", color: "#d97744", margin: "1.5%" }}
+      >
+        Add Product
+      </DialogTitle>
       <DialogContent>
         <input
           type="file"
@@ -86,7 +91,7 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
         <TextField
           margin="dense"
           id="imageSourceLink"
-          label="Image Source Link *"
+          label="Image Source *"
           type="text"
           fullWidth
           value={imageSourceLink}
@@ -121,13 +126,13 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleClose} color="#d97744">
           Cancel
         </Button>
         <Button
           onClick={handleSaveClick}
           disabled={disableSave}
-          color="primary"
+          color="#d97744"
         >
           Save
         </Button>

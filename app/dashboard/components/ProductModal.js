@@ -39,7 +39,8 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
   };
 
   const generateImage = async (description) => {
-    const apiKey = "b2247b90c0a87b2dc2e1507e1f631a1e36a3b3b65450e0ac207503d50a6329dbb85c1b480252673848fc7be9d87905e6";
+    const apiKey =
+      "b2247b90c0a87b2dc2e1507e1f631a1e36a3b3b65450e0ac207503d50a6329dbb85c1b480252673848fc7be9d87905e6";
     const form = new FormData();
     form.append("prompt", description);
 
@@ -91,7 +92,12 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
     >
-      <DialogTitle id="form-dialog-title">Add Product</DialogTitle>
+      <DialogTitle
+        id="form-dialog-title"
+        style={{ textAlign: "center", color: "#d97744", margin: "1.5%" }}
+      >
+        Add Product
+      </DialogTitle>
       <DialogContent>
         <TextField
           autoFocus
@@ -115,7 +121,7 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
         <TextField
           margin="dense"
           id="imageSourceLink"
-          label="Image Source Link *"
+          label="Image Source *"
           type="text"
           fullWidth
           value={imageSourceLink}
@@ -139,13 +145,13 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleClose} color="#d97744">
           Cancel
         </Button>
         <Button
           onClick={handleSaveClick}
           disabled={disableSave}
-          color="primary"
+          color="#d97744"
         >
           Save
         </Button>

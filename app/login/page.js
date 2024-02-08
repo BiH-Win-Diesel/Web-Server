@@ -84,7 +84,7 @@ const LoginForm = () => {
             type="submit"
             variant="contained"
             fullWidth
-            style={{ backgroundColor: "#2c4152", color: "#fffded" }}
+            style={{ backgroundColor: "#d97744", color: "#fffded" }}
           >
             Login
           </Button>

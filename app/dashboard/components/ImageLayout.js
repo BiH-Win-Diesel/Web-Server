@@ -6,16 +6,16 @@ import Image from "next/image";
 const useStyles = makeStyles((theme) => ({
   itemContainer: {
     background: "white",
-    borderRadius: "10px",
     border: "1px solid #d5dde1",
-    margin: "3%",
+    margin: "2%",
+    padding: "3%",
   },
   dataContainer: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     marginTop: "1%",
-    padding: "3%"
+    padding: "3%",
   },
   marginSpan: {
     margin: "0.5%",
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   boxContainerForImage: {
     display: "flex",
-    justifyContent:"center",
+    justifyContent: "center",
     width: "100%",
     height: "400px",
   },
