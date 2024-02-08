@@ -8,6 +8,7 @@ import {
   LinearProgress,
   TextField,
 } from "@material-ui/core";
+import { useFileUpload } from "@/app/hooks/lib/uploadImage";
 
 const ProductModal = ({ open, handleClose, handleSave }) => {
   const path = "images/ProductImages/";
@@ -18,6 +19,13 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
   const [disableSave, setDisableSave] = useState(true);
   const [loader, setLoader] = useState(false);
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+
+  function randomString(length, chars) {
+    var result = "";
+    for (var i = length; i > 0; --i)
+      result += chars[Math.floor(Math.random() * chars.length)];
+    return result;
+  }
 
   const handleSaveClick = () => {
     handleSave({
@@ -31,8 +39,7 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
   };
 
   const generateImage = async (description) => {
-    const apiKey =
-      "b2247b90c0a87b2dc2e1507e1f631a1e36a3b3b65450e0ac207503d50a6329dbb85c1b480252673848fc7be9d87905e6";
+    const apiKey = "b2247b90c0a87b2dc2e1507e1f631a1e36a3b3b65450e0ac207503d50a6329dbb85c1b480252673848fc7be9d87905e6";
     const form = new FormData();
     form.append("prompt", description);
 
@@ -47,10 +54,20 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
       });
       if (response.ok) {
         const blob = await response.blob();
-        const imageObjectURL = URL.createObjectURL(blob);
-        setImagePreviewUrl(imageObjectURL);
-        setImageSourceLink(imageObjectURL);
-        setDisableSave(false);
+        const uploadFile = useFileUpload();
+        var rString = randomString(
+          32,
+          "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        );
+        const filename = `${rString}.png`;
+        const uploadOk = await uploadFile(filename, blob, path);
+        if (uploadOk) {
+          setImageSourceLink(filename);
+          setImagePreviewUrl(
+            `https://storage.googleapis.com/hackathon-bucket-123/images/ProductImages/${filename}`
+          );
+          setDisableSave(false);
+        }
       } else {
         const errorText = await response.text();
         alert("Image generation failed: " + errorText);
