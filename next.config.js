@@ -19,14 +19,9 @@ const nextConfig = {
       },
       {
         source: '/api/detect-text',
-        destination: 'http://localhost:3001/detect-text',
+        destination: 'http://35.194.4.148:3001/detect-text',
         permanent: true,
-      },
-      {
-        source: '/api/voice',
-        destination: `http://127.0.0.1:8000/voice/`,
-        permanent: true,
-      },
+      }
     ]
   },
 };
