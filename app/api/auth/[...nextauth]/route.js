@@ -17,7 +17,7 @@ export const authOptions = {
       async authorize(credentials, req) {
         if (typeof credentials !== "undefined") {
           const results = await db.query(
-            `select * from users where PhoneNumber = ${credentials.phonenumber}`
+            `select * from Users where PhoneNumber = ${credentials.phonenumber}`
           );
           if (results.length == 0) {
             return null;

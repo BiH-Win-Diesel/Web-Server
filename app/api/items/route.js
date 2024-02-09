@@ -12,7 +12,7 @@ export async function GET(request) {
         { status: 401 }
       );
     }
-    const results = await db.query("SELECT * FROM products");
+    const results = await db.query("SELECT * FROM Products");
     return NextResponse.json({ data: results }, { status: 200 });
   } catch (error) {
     console.error(error);
@@ -48,7 +48,7 @@ export async function PATCH(request) {
       );
     }
     const rq = await request.json();
-    let st = `UPDATE products SET Quantity = ${rq.quantity} where ProductID = ${rq.id}`;
+    let st = `UPDATE Products SET Quantity = ${rq.quantity} where ProductID = ${rq.id}`;
     const results = await db.query(st);
     return NextResponse.json({ data: "results" }, { status: 201 });
   } catch (error) {
