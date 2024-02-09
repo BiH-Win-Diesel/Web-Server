@@ -36,8 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ImageLayout(product) {
-  const currentLang = localStorage.getItem("Lang") || "en";
-  const t = translateMapping[currentLang];
+  const t = product.t
   const classes = useStyles();
   const { Data, Quantity, Price, ImageSourceLink, ProductID } = product.product;
   const [quantity, setQuantity] = useState(Quantity);

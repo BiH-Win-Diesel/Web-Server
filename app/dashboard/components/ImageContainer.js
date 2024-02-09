@@ -5,9 +5,8 @@ import VoiceUploader from "./VoiceUploader";
 import { useState } from "react";
 import translateMapping from "@/translate";
 
-export default function ImageContainer() {
-  const currentLang = localStorage.getItem("Lang") || "en";
-  const t = translateMapping[currentLang];
+export default function ImageContainer(props) {
+  const t = props.t
 
   const [open, setOpen] = useState(false);
   const [open1, setOpen1] = useState(false);
@@ -108,16 +107,19 @@ export default function ImageContainer() {
         open={open}
         handleClose={handleClose}
         handleSave={handleSave}
+        t = {t}
       />
       <ImageModal
         open={open1}
         handleClose={handleClose1}
         handleSave={handleSave}
+        t = {t}
       />
       <VoiceUploader
         open={open2}
         handleClose={handleClose2}
         handleSave={handleSave}
+        t = {t}
       />
     </Container>
   );

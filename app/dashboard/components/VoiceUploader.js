@@ -35,9 +35,7 @@ function extractInformation(text) {
   return { description, quantity, price };
 }
 
-const VoiceUploader = ({ open, handleClose, handleSave }) => {
-  const currentLang = localStorage.getItem("Lang") || "en";
-  const t = translateMapping[currentLang];
+const VoiceUploader = ({ open, handleClose, handleSave, t }) => {
   const path = "images/ProductImages/";
   const uploadFile = useFileUpload();
 

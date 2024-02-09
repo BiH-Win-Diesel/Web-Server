@@ -157,27 +157,25 @@ export default function Dashboard() {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
-          >
-            <TranslateIcon
-              onClick={(e) => {
-                const curr = localStorage.getItem("Lang");
-                let temp = "";
-
-                if (curr === "en") {
-                  temp = "hn";
+            onClick={(e) => {
+              const curr = localStorage.getItem("Lang");
+              let temp = "";
+              if (curr === "en") {
+                temp = "hn";
+              } else {
+                if (curr === "hn") {
+                  temp = "en";
                 } else {
-                  if (curr === "hn") {
-                    temp = "en";
-                  } else {
-                    if (curr === null) {
-                      temp = "hn";
-                    }
+                  if (curr === null) {
+                    temp = "hn";
                   }
                 }
-                localStorage.setItem("Lang", temp);
-                setLang(temp);
-              }}
-            />
+              }
+              localStorage.setItem("Lang", temp);
+              setLang(temp);
+            }}
+          >
+            <TranslateIcon/>
           </IconButton>
           <Typography className={classes.title} variant="h4" noWrap>
             <b>ONDC</b>
@@ -207,7 +205,6 @@ export default function Dashboard() {
                 const product = updateproduct.filter((x) => {
                   return x.Data.indexOf(txt) != -1;
                 });
-                console.log(product);
                 setProducts(product);
               }}
             />
@@ -221,7 +218,7 @@ export default function Dashboard() {
       />
       <Container style={{ marginTop: "8%", marginBottom: "8%" }}>
         <center>
-          <ImageContainer/>
+          <ImageContainer t={t}/>
         </center>
       </Container>
       <Container
@@ -229,7 +226,7 @@ export default function Dashboard() {
         style={{ marginTop: "10%", marginBottom: "7%" }}
       >
         {products.length > 0 &&
-          products.map((p) => <ImageLayout key={p.ProductID} product={p} />)}
+          products.map((p) => <ImageLayout key={p.ProductID} product={p} t={t}/>)}
       </Container>
       <div
         style={{
