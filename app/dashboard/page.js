@@ -24,7 +24,6 @@ import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import ReceiptIcon from "@material-ui/icons/Receipt";
 import ImageLayout from "./components/ImageLayout";
 import ImageContainer from "./components/ImageContainer";
-import VoiceUploader from "./components/VoiceUploader";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -143,7 +142,6 @@ export default function Dashboard() {
           padding: "0.3%",
         }}
       >
-        {/* <VoiceUploader/> */}
         <Toolbar>
           <IconButton
             edge="start"

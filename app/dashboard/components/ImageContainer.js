@@ -1,6 +1,7 @@
 import { Button, Container, makeStyles, Grid } from "@material-ui/core";
 import ProductModal from "./ProductModal";
 import ImageModal from "./ImageModal";
+import VoiceUploader from "./VoiceUploader";
 import { useState } from "react";
 
 const useStyles = makeStyles(({ theme }) => ({}));
@@ -10,12 +11,18 @@ export default function ImageContainer() {
 
   const [open, setOpen] = useState(false);
   const [open1, setOpen1] = useState(false);
+  const [open2, setOpen2] = useState(false);
+
   const handleClose = () => {
     setOpen(false);
   };
 
   const handleClose1 = () => {
     setOpen1(false);
+  };
+
+  const handleClose2 = () => {
+    setOpen2(false);
   };
 
   const handleSave = (data) => {
@@ -69,7 +76,7 @@ export default function ImageContainer() {
               padding: "7%",
             }}
           />
-          <p style={{ fontWeight: "bold", cursor: "pointer" }}>
+          <p style={{ fontWeight: "bold", cursor: "pointer" }} onClick={() => setOpen2(true)}>
             Catalouge Update through Voice
           </p>
           <p style={{ fontSize: "13px" }}>
@@ -108,6 +115,11 @@ export default function ImageContainer() {
       <ImageModal
         open={open1}
         handleClose={handleClose1}
+        handleSave={handleSave}
+      />
+      <VoiceUploader
+        open={open2}
+        handleClose={handleClose2}
         handleSave={handleSave}
       />
     </Container>
