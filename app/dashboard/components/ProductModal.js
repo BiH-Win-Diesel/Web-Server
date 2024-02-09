@@ -10,9 +10,10 @@ import {
 } from "@material-ui/core";
 import { useFileUpload } from "@/app/hooks/lib/uploadImage";
 import translateMapping from "@/translate";
+import SendIcon from "@material-ui/icons/Send";
 
 const ProductModal = ({ open, handleClose, handleSave }) => {
-  const t = translateMapping[process.env.lang]
+  const t = translateMapping[process.env.lang];
   const path = "images/ProductImages/";
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState("");
@@ -101,23 +102,16 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
         {t.add_product}
       </DialogTitle>
       <DialogContent>
-        <div>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="description"
-            label={`${t.product} *`}
-            type="text"
-            fullWidth
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-          <center>
-            <Button onClick={handleGenerateImageClick} color="primary">
-              {t.generate_image}
-            </Button>
-          </center>
-        </div>
+        <TextField
+          autoFocus
+          margin="dense"
+          id="description"
+          label={`${t.product} *`}
+          type="text"
+          fullWidth
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
         <TextField
           margin="dense"
           id="price"
@@ -127,7 +121,7 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
-        <TextField
+        {/* <TextField
           margin="dense"
           id="imageSourceLink"
           label={`${t.image_source} *`}
@@ -135,14 +129,7 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
           fullWidth
           value={imageSourceLink}
           disabled={true}
-        />
-        {imagePreviewUrl && (
-          <img
-            src={imagePreviewUrl}
-            alt="Generated"
-            style={{ width: "100%", marginTop: 20 }}
-          />
-        )}
+        /> */}
         <TextField
           margin="dense"
           id="quantity"
@@ -152,8 +139,32 @@ const ProductModal = ({ open, handleClose, handleSave }) => {
           value={quantity}
           onChange={(e) => setQuantity(e.target.value)}
         />
+        {imagePreviewUrl && (
+          <img
+            src={imagePreviewUrl}
+            alt="Generated"
+            style={{ width: "100%", marginTop: 20 }}
+          />
+        )}
+        <center>
+          <br />
+          <br />
+          <Button
+            variant="outlined"
+            onClick={handleGenerateImageClick}
+            endIcon={<SendIcon />}
+            style={{
+              color: "#d97744",
+              borderColor: "#d97744",
+              borderRadius: "20px",
+              width: "100%",
+            }}
+          >
+            {t.generate_image}
+          </Button>
+        </center>
       </DialogContent>
-      <DialogActions>
+      <DialogActions style={{ marginTop: "2%" }}>
         <Button onClick={handleClose} color="#d97744">
           Cancel
         </Button>

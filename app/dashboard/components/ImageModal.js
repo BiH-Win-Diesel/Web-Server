@@ -10,9 +10,11 @@ import {
 } from "@material-ui/core";
 import { useFileUpload } from "@/app/hooks/lib/uploadImage";
 import translateMapping from "@/translate";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import { styled } from "@mui/material/styles";
 
 const ImageModal = ({ open, handleClose, handleSave }) => {
-  const t = translateMapping[process.env.lang]
+  const t = translateMapping[process.env.lang];
   const path = "images/ProductImages/";
   const uploadFile = useFileUpload();
   const [quantity, setQuantity] = useState("");
@@ -22,6 +24,16 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
   const [disableSave, setDisableSave] = useState(true);
   const [loader, setLoader] = useState(false);
 
+  const VisuallyHiddenInput = styled("input")({
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: 1,
+    overflow: "hidden",
+    position: "absolute",
+    whiteSpace: "nowrap",
+    width: 1,
+  });
+
   const handleFileSelect = async (file) => {
     setLoader(true);
     const uploadOk = await uploadFile(file.name, file, path);
@@ -29,6 +41,7 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
       setImageSourceLink(file.name);
       await fetchProductName(file.name);
       setLoader(false);
+      setDisableSave(false);
     } else {
       setLoader(false);
       alert("Upload Failed!");
@@ -56,11 +69,11 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
       alert("Image Scrapped Successfully!");
       const result = await response.json();
       setProductName(result.productName);
-      setDisableSave(false);
     } catch (error) {
       console.error("Error fetching product name:", error);
     }
   };
+
   const handleSaveClick = async () => {
     handleSave({
       data: productName,
@@ -72,6 +85,8 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
 
     handleClose();
   };
+
+  const textFieldsDisabled = !imageSourceLink;
 
   return (
     <Dialog
@@ -86,21 +101,6 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
         {t.add_product}
       </DialogTitle>
       <DialogContent>
-        <center>
-          <input
-            type="file"
-            onChange={(e) => handleFileSelect(e.target.files[0])}
-          />
-        </center>
-        <TextField
-          margin="dense"
-          id="imageSourceLink"
-          label={`${t.image_source} *`}
-          type="text"
-          fullWidth
-          value={imageSourceLink}
-          onChange={(e) => setImageSourceLink(e.target.value)}
-        />
         <TextField
           margin="dense"
           id="product"
@@ -108,6 +108,7 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
           type="text"
           fullWidth
           value={productName}
+          disabled={textFieldsDisabled}
           onChange={(e) => setProductName(e.target.value)}
         />
         <TextField
@@ -117,7 +118,18 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
           type="number"
           fullWidth
           value={price}
+          disabled={textFieldsDisabled}
           onChange={(e) => setPrice(e.target.value)}
+        />
+        <TextField
+          margin="dense"
+          id="imageSourceLink"
+          label={`${t.image_source} *`}
+          type="text"
+          fullWidth
+          value={imageSourceLink}
+          disabled={textFieldsDisabled}
+          onChange={(e) => setImageSourceLink(e.target.value)}
         />
         <TextField
           margin="dense"
@@ -126,17 +138,39 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
           type="number"
           fullWidth
           value={quantity}
+          disabled={textFieldsDisabled}
           onChange={(e) => setQuantity(e.target.value)}
         />
+        <center>
+          <br />
+          <br />
+          <Button
+            component="label"
+            variant="outlined"
+            startIcon={<CloudUploadIcon />}
+            style={{
+              color: "#d97744",
+              border: "1px solid #d97744",
+              borderRadius: "20px",
+              width: "100%",
+            }}
+          >
+            Upload File
+            <VisuallyHiddenInput
+              type="file"
+              onChange={(e) => handleFileSelect(e.target.files[0])}
+            />
+          </Button>
+        </center>
       </DialogContent>
-      <DialogActions>
-        <Button onClick={handleClose} color="#d97744">
+      <DialogActions style={{ marginTop: "2%" }}>
+        <Button onClick={handleClose} color="primary">
           Cancel
         </Button>
         <Button
           onClick={handleSaveClick}
           disabled={disableSave}
-          color="#d97744"
+          color="primary"
         >
           Save
         </Button>
