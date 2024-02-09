@@ -12,7 +12,7 @@ import { useFileUpload } from "@/app/hooks/lib/uploadImage";
 import translateMapping from "@/translate";
 
 const ImageModal = ({ open, handleClose, handleSave }) => {
-  const t = translateMapping['hn']
+  const t = translateMapping[process.env.lang]
   const path = "images/ProductImages/";
   const uploadFile = useFileUpload();
   const [quantity, setQuantity] = useState("");

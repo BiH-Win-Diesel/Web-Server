@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ImageLayout(product) {
-  const t = translateMapping["hn"];
+  const t = translateMapping[process.env.lang]
   const classes = useStyles();
   const { Data, Quantity, Price, ImageSourceLink, ProductID } = product.product;
   const [quantity, setQuantity] = useState(Quantity);

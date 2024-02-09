@@ -37,7 +37,7 @@ function extractInformation(text) {
 }
 
 const VoiceUploader = ({ open, handleClose, handleSave }) => {
-  const t = translateMapping['hn']
+  const t = translateMapping[process.env.lang]
 
   var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   var recognition = new SpeechRecognition();

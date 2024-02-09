@@ -1,4 +1,7 @@
 const nextConfig = {
+  env:{
+    lang : 'en'
+  },
   images: {
     remotePatterns: [
       {

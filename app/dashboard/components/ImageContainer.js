@@ -7,7 +7,7 @@ import translateMapping from "@/translate";
 
 export default function ImageContainer() {
 
-  const t = translateMapping["hn"]
+  const t = translateMapping[process.env.lang]
 
   const [open, setOpen] = useState(false);
   const [open1, setOpen1] = useState(false);

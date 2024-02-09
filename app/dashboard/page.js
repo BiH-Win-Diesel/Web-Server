@@ -112,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Dashboard() {
-  const t = translateMapping["hn"];
+  const t = translateMapping[process.env.lang]
   const classes = useStyles();
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
