@@ -37,7 +37,6 @@ function extractInformation(text) {
 
 const VoiceUploader = ({ open, handleClose, handleSave }) => {
 
-
   var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
   var recognition = new SpeechRecognition();
 
