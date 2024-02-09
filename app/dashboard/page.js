@@ -24,6 +24,7 @@ import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 import ReceiptIcon from "@material-ui/icons/Receipt";
 import ImageLayout from "./components/ImageLayout";
 import ImageContainer from "./components/ImageContainer";
+import translateMapping from "@/translate";
 
 const useStyles = makeStyles((theme) => ({
   form: {
@@ -111,6 +112,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Dashboard() {
+  const t = translateMapping["hn"];
   const classes = useStyles();
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
@@ -193,7 +195,7 @@ export default function Dashboard() {
         style={{ marginTop: "10%", marginBottom: "7%" }}
       >
         {products.length > 0 &&
-          products.map((p) => <ImageLayout product={p} />)}
+          products.map((p) => <ImageLayout key={p.ProductID} product={p} />)}
       </Container>
       <div
         style={{
@@ -204,9 +206,9 @@ export default function Dashboard() {
       >
         <center>
           <h2>
-            " Retail's Digitization Boom is Not Leaving Kirana Stores Behind "
+            " {t.quote} "
           </h2>
-          <i>-Harsh Gupta, Investor, India</i>
+          <i>-{t.person}</i>
         </center>
       </div>
 

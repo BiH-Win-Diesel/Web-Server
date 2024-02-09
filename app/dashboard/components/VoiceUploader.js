@@ -11,6 +11,7 @@ import {
   LinearProgress,
   TextField,
 } from "@material-ui/core";
+import translateMapping from "@/translate";
 
 function randomString(length, chars) {
   var result = "";
@@ -36,8 +37,9 @@ function extractInformation(text) {
 }
 
 const VoiceUploader = ({ open, handleClose, handleSave }) => {
+  const t = translateMapping['hn']
 
-  var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+  var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   var recognition = new SpeechRecognition();
 
   const [flag, setFlag] = useState(true);
@@ -59,6 +61,10 @@ const VoiceUploader = ({ open, handleClose, handleSave }) => {
       setQuantity(quantity);
       setPrice(price);
     };
+
+    recognition.onspeechend = () => {
+      recognition.stop();
+    };
   }, [recognition]);
 
   const handleSaveClick = async () => {
@@ -78,8 +84,8 @@ const VoiceUploader = ({ open, handleClose, handleSave }) => {
   }
 
   function voiceStopHandler() {
-    setProcessing(true);
-    recognition.stop();
+    // setProcessing(true);
+    // recognition.stop();
   }
 
   return (
@@ -93,7 +99,7 @@ const VoiceUploader = ({ open, handleClose, handleSave }) => {
           id="form-dialog-title"
           style={{ textAlign: "center", color: "#d97744", margin: "1.5%" }}
         >
-          Add Product
+          {t.add_product}
         </DialogTitle>
         {
           <center>
@@ -126,7 +132,7 @@ const VoiceUploader = ({ open, handleClose, handleSave }) => {
           <TextField
             margin="dense"
             id="product"
-            label="Product *"
+            label={`${t.product} *`}
             type="text"
             fullWidth
             value={productName}
@@ -135,7 +141,7 @@ const VoiceUploader = ({ open, handleClose, handleSave }) => {
           <TextField
             margin="dense"
             id="price"
-            label="Price *"
+            label={`${t.price} *`}
             type="number"
             fullWidth
             value={price}
@@ -144,7 +150,7 @@ const VoiceUploader = ({ open, handleClose, handleSave }) => {
           <TextField
             margin="dense"
             id="quantity"
-            label="Stock"
+            label={t.stock}
             type="number"
             fullWidth
             value={quantity}

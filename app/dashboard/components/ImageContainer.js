@@ -3,11 +3,11 @@ import ProductModal from "./ProductModal";
 import ImageModal from "./ImageModal";
 import VoiceUploader from "./VoiceUploader";
 import { useState } from "react";
-
-const useStyles = makeStyles(({ theme }) => ({}));
+import translateMapping from "@/translate";
 
 export default function ImageContainer() {
-  const classes = useStyles();
+
+  const t = translateMapping["hn"]
 
   const [open, setOpen] = useState(false);
   const [open1, setOpen1] = useState(false);
@@ -58,11 +58,10 @@ export default function ImageContainer() {
             style={{ fontWeight: "bold", cursor: "pointer" }}
             onClick={() => setOpen(true)}
           >
-            Catalouge Update through Text
+            {t.text}
           </p>
           <p style={{ fontSize: "13px" }}>
-            Use Generative AI to Digitize Your Catalouge. Update Your Product
-            without an Image
+            {t.gen_ai}
           </p>
         </Grid>
         <Grid item xs={12} sm={6} md={4} lg={4}>
@@ -77,11 +76,10 @@ export default function ImageContainer() {
             }}
           />
           <p style={{ fontWeight: "bold", cursor: "pointer" }} onClick={() => setOpen2(true)}>
-            Catalouge Update through Voice
+            {t.voice}
           </p>
           <p style={{ fontSize: "13px" }}>
-            Use Speech Recognition and NLP to Digitize Your Catalouge. Update
-            Your Product with Your Voice
+            {t.voice_description}
           </p>
         </Grid>
         <Grid item xs={12} sm={6} md={4} lg={4}>
@@ -99,11 +97,10 @@ export default function ImageContainer() {
             style={{ fontWeight: "bold", cursor: "pointer" }}
             onClick={() => setOpen1(true)}
           >
-            Catalouge Update through Image
+            {t.image}
           </p>
           <p style={{ fontSize: "13px" }}>
-            Use Image Recognition Tools to Digitize Your Catalouge. Update Your
-            Product with a Text Detectable Photo
+            {t.image_recog}
           </p>
         </Grid>
       </Grid>
