@@ -2,6 +2,7 @@ import { Box, Button, Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Image from "next/image";
+import translateMapping from "@/translate";
 
 const useStyles = makeStyles((theme) => ({
   itemContainer: {
@@ -35,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ImageLayout(product) {
+  const t = translateMapping["hn"];
   const classes = useStyles();
   const { Data, Quantity, Price, ImageSourceLink, ProductID } = product.product;
   const [quantity, setQuantity] = useState(Quantity);
@@ -93,7 +95,7 @@ export default function ImageLayout(product) {
               marginTop: "1%",
             }}
           >
-            <Grid item xs={6} style={{ textAlign: "left" }}>
+            <Grid item xs={12} style={{ textAlign: "left" }}>
               <b>
                 <span className={classes.marginSpan}>₹ {Price}.00</span>
               </b>
@@ -102,10 +104,10 @@ export default function ImageLayout(product) {
                 className={classes.marginSpan}
                 style={{ fontSize: "12px", color: "#cfc9c6" }}
               >
-                Stock: {quantity}
+                {t.stock}: {quantity}
               </span>
             </Grid>
-            <Grid item xs={6} style={{ textAlign: "right" }}>
+            {/* <Grid item xs={6} style={{ textAlign: "right" }}>
               <Button
                 style={{
                   background: "grey",
@@ -117,7 +119,7 @@ export default function ImageLayout(product) {
               >
                 Add to Cart
               </Button>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Box>
       </Box>

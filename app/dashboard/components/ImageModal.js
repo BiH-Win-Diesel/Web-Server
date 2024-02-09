@@ -9,8 +9,10 @@ import {
   TextField,
 } from "@material-ui/core";
 import { useFileUpload } from "@/app/hooks/lib/uploadImage";
+import translateMapping from "@/translate";
 
 const ImageModal = ({ open, handleClose, handleSave }) => {
+  const t = translateMapping['hn']
   const path = "images/ProductImages/";
   const uploadFile = useFileUpload();
   const [quantity, setQuantity] = useState("");
@@ -81,7 +83,7 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
         id="form-dialog-title"
         style={{ textAlign: "center", color: "#d97744", margin: "1.5%" }}
       >
-        Add Product
+        {t.add_product}
       </DialogTitle>
       <DialogContent>
         <center>
@@ -93,7 +95,7 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
         <TextField
           margin="dense"
           id="imageSourceLink"
-          label="Image Source *"
+          label={`${t.image_source} *`}
           type="text"
           fullWidth
           value={imageSourceLink}
@@ -102,7 +104,7 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
         <TextField
           margin="dense"
           id="product"
-          label="Product *"
+          label={`${t.product} *`}
           type="text"
           fullWidth
           value={productName}
@@ -111,7 +113,7 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
         <TextField
           margin="dense"
           id="price"
-          label="Price *"
+          label={`${t.price} *`}
           type="number"
           fullWidth
           value={price}
@@ -120,7 +122,7 @@ const ImageModal = ({ open, handleClose, handleSave }) => {
         <TextField
           margin="dense"
           id="quantity"
-          label="Stock"
+          label={t.stock}
           type="number"
           fullWidth
           value={quantity}
