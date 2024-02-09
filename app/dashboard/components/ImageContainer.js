@@ -6,8 +6,8 @@ import { useState } from "react";
 import translateMapping from "@/translate";
 
 export default function ImageContainer() {
-
-  const t = translateMapping[process.env.lang]
+  const currentLang = localStorage.getItem("Lang") || "en";
+  const t = translateMapping[currentLang];
 
   const [open, setOpen] = useState(false);
   const [open1, setOpen1] = useState(false);

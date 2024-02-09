@@ -12,8 +12,9 @@ import { useFileUpload } from "@/app/hooks/lib/uploadImage";
 import translateMapping from "@/translate";
 import SendIcon from "@material-ui/icons/Send";
 
-const ProductModal = ({ open, handleClose, handleSave }) => {
-  const t = translateMapping[process.env.lang];
+const ProductModal = ({ open, handleClose, handleSave}) => {
+  const currentLang = localStorage.getItem("Lang") || "en";
+  const t = translateMapping[currentLang];
   const path = "images/ProductImages/";
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState("");

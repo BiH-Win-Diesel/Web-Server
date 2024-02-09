@@ -36,7 +36,8 @@ function extractInformation(text) {
 }
 
 const VoiceUploader = ({ open, handleClose, handleSave }) => {
-  const t = translateMapping[process.env.lang];
+  const currentLang = localStorage.getItem("Lang") || "en";
+  const t = translateMapping[currentLang];
   const path = "images/ProductImages/";
   const uploadFile = useFileUpload();
 

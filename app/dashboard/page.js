@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import { alpha, makeStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+import TranslateIcon from "@material-ui/icons/Translate";
 import SearchIcon from "@material-ui/icons/Search";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import InstagramIcon from "@material-ui/icons/Instagram";
@@ -112,10 +112,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Dashboard() {
-  const t = translateMapping[process.env.lang]
   const classes = useStyles();
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
+  const [updateproduct, setUpdateproduct] = useState([]);
+  const [lang, setLang] = useState("en");
+  const [t, setT] = useState(translateMapping["en"]);
+
+  useEffect(()=>{
+    setT(translateMapping[lang]);
+  },[lang]);
 
   useEffect(() => {
     fetch("/api/items")
@@ -127,6 +133,7 @@ export default function Dashboard() {
       })
       .then((data) => {
         setProducts(data.data);
+        setUpdateproduct(data.data);
       })
       .catch((err) => {
         console.log(err);
@@ -151,7 +158,26 @@ export default function Dashboard() {
             color="inherit"
             aria-label="open drawer"
           >
-            <MenuIcon />
+            <TranslateIcon
+              onClick={(e) => {
+                const curr = localStorage.getItem("Lang");
+                let temp = "";
+
+                if (curr === "en") {
+                  temp = "hn";
+                } else {
+                  if (curr === "hn") {
+                    temp = "en";
+                  } else {
+                    if (curr === null) {
+                      temp = "hn";
+                    }
+                  }
+                }
+                localStorage.setItem("Lang", temp);
+                setLang(temp);
+              }}
+            />
           </IconButton>
           <Typography className={classes.title} variant="h4" noWrap>
             <b>ONDC</b>
@@ -176,6 +202,14 @@ export default function Dashboard() {
                 input: classes.inputInput,
               }}
               inputProps={{ "aria-label": "search" }}
+              onChange={(e) => {
+                const txt = e.target.value;
+                const product = updateproduct.filter((x) => {
+                  return x.Data.indexOf(txt) != -1;
+                });
+                console.log(product);
+                setProducts(product);
+              }}
             />
           </div>
         </Toolbar>
@@ -187,7 +221,7 @@ export default function Dashboard() {
       />
       <Container style={{ marginTop: "8%", marginBottom: "8%" }}>
         <center>
-          <ImageContainer />
+          <ImageContainer/>
         </center>
       </Container>
       <Container
@@ -205,9 +239,7 @@ export default function Dashboard() {
         }}
       >
         <center>
-          <h2>
-            " {t.quote} "
-          </h2>
+          <h2>" {t.quote} "</h2>
           <i>-{t.person}</i>
         </center>
       </div>
