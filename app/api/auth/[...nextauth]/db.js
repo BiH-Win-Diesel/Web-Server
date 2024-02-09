@@ -3,10 +3,10 @@ const mysql = require("mysql");
 // mysql --host=35.202.164.234 --user=root --password=subhojit-dey --database=user-details
 
 const connection = mysql.createConnection({
-  host: "localhost",
+  host: "35.202.164.234",
   user: "root",
-  password: "",
-  database: "bih_win_diesel",
+  password: "subhojit-dey",
+  database: "user-details",
   connectTimeout: 20000,
 });
 
