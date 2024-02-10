@@ -30,7 +30,7 @@ export async function POST(request) {
       );
     }
     const rq = await request.json();
-    let st = `INSERT INTO products (Data, Description, Quantity, Price, ImageSourceLink) VALUES ('${rq.data}', '${rq.description}', ${rq.quantity}, ${rq.price}, '${rq.imageSourceLink}')`;
+    let st = `INSERT INTO Products (Data, Description, Quantity, Price, ImageSourceLink) VALUES ('${rq.data}', '${rq.description}', ${rq.quantity}, ${rq.price}, '${rq.imageSourceLink}')`;
     const results = await db.query(st);
     return NextResponse.json({ data: "results" }, { status: 201 });
   } catch (error) {
