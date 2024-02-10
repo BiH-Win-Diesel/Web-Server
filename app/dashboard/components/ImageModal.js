@@ -13,7 +13,7 @@ import translateMapping from "@/translate";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import { styled } from "@mui/material/styles";
 
-const ImageModal = ({ open, handleClose, handleSavem, t }) => {
+const ImageModal = ({ open, handleClose, handleSave, t }) => {
   // const currentLang = localStorage.getItem("Lang") || "en";
   // const t = translateMapping[currentLang];
   const path = "images/ProductImages/";
